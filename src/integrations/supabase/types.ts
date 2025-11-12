@@ -14,7 +14,92 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      contributions: {
+        Row: {
+          amount: number
+          contributor_email: string | null
+          contributor_name: string
+          created_at: string
+          event_id: string
+          id: string
+          status: string
+          stripe_payment_intent_id: string
+        }
+        Insert: {
+          amount: number
+          contributor_email?: string | null
+          contributor_name: string
+          created_at?: string
+          event_id: string
+          id?: string
+          status?: string
+          stripe_payment_intent_id: string
+        }
+        Update: {
+          amount?: number
+          contributor_email?: string | null
+          contributor_name?: string
+          created_at?: string
+          event_id?: string
+          id?: string
+          status?: string
+          stripe_payment_intent_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contributions_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      events: {
+        Row: {
+          created_at: string
+          current_amount: number
+          description: string
+          event_date: string
+          goal_amount: number
+          id: string
+          organizer_email: string
+          organizer_name: string
+          slug: string
+          stripe_account_id: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          current_amount?: number
+          description: string
+          event_date: string
+          goal_amount: number
+          id?: string
+          organizer_email: string
+          organizer_name: string
+          slug: string
+          stripe_account_id?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          current_amount?: number
+          description?: string
+          event_date?: string
+          goal_amount?: number
+          id?: string
+          organizer_email?: string
+          organizer_name?: string
+          slug?: string
+          stripe_account_id?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
