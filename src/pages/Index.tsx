@@ -1,10 +1,16 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Gift, Users, Heart, Sparkles } from "lucide-react";
+import Header from "@/components/Header";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Index = () => {
+  const { user } = useAuth();
+
   return (
     <div className="min-h-screen bg-background">
+      <Header />
+      
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-primary py-20 px-4 sm:px-6 lg:px-8">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzBoLTJWMThoMnYxMnptLTEyIDBoLTJWMThoMnYxMnpNNDggNDJoLTJ2LTEyaDJ2MTJ6TTEyIDQyaC0ydi0xMmgydjEyeiIvPjwvZz48L2c+PC9zdmc+')] opacity-30"></div>
@@ -24,10 +30,10 @@ const Index = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/create">
+            <Link to={user ? "/create" : "/auth"}>
               <Button size="lg" className="bg-white text-primary hover:bg-white/90 shadow-medium">
                 <Gift className="mr-2 h-5 w-5" />
-                Create Your Event
+                {user ? "Create Your Event" : "Get Started"}
               </Button>
             </Link>
             <Button size="lg" variant="outline" className="bg-transparent border-2 border-white text-white hover:bg-white/10">
@@ -92,10 +98,10 @@ const Index = () => {
           <p className="text-lg text-muted-foreground mb-8">
             Join others who are making group gifting simple and stress-free
           </p>
-          <Link to="/create">
+          <Link to={user ? "/create" : "/auth"}>
             <Button size="lg" className="shadow-medium">
               <Gift className="mr-2 h-5 w-5" />
-              Create Your First Event
+              {user ? "Create Your First Event" : "Sign Up Now"}
             </Button>
           </Link>
         </div>
